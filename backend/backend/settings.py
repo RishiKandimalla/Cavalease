@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import secrets
+import environ
+#import storages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'api'
+    'api',
+    'storages',
+    'environ'
 ]
 
 MIDDLEWARE = [
@@ -135,7 +139,20 @@ CORS_ALLOWED_ORIGINS = [
     "https://cavalease.vercel.app",  # Frontend in production
 ]
 
-
+env = environ.Env()
+environ.Env.read_env(env_file='.env')
+ 
+ 
+STORAGES = {
+     "default": {
+         "BACKEND": "storages.backends.s3.S3Storage",
+         "OPTIONS": {
+             'bucket_name': 'cavalease-bucket',
+             'region_name': 'us-east-1'
+         },
+     },
+     "staticfiles": "storages.backends.s3.S3Storage",
+ }
 
 try:
     if 'HEROKU' in os.environ:
