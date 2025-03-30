@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { signOut } from "firebase/auth";
 import Button from "./components/Button";
-import { nav } from "framer-motion/client";
+import { UserContext } from "./UserContext.jsx";
 import MapComponent from "./components/MapComponent.jsx";
 
 function Searchers() {
     const navigate = useNavigate();
+    const { user } = useContext(UserContext); // Get user from context
+    const isLoggedIn = !!user;
+
+    const goToLoginPage = () => navigate('/login');
+
     const [formData, setFormData] = useState({
         name: "",
         age: "",
@@ -20,6 +26,15 @@ function Searchers() {
         pets: false,
         parkingPass: false
     });
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            console.log("User signed out successfully");
+        } catch (error) {
+            console.error("Error signing out:", error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -42,9 +57,18 @@ function Searchers() {
                <button onClick={() => navigate("/")} className="text-3xl font-bold bg-primary-2 tracking-wide cursor-pointer">
                  CAVALEASE
              </button>
-                 <Button onClick={() => navigate('/login')} className="bg-primary text-primary-2 ">
-                   Login
-                 </Button>
+             {isLoggedIn ? (
+                    <div className="flex items-center gap-4">
+                        <p>You are logged in</p>
+                        <Button onClick={handleSignOut} className="bg-primary text-white">
+                            Sign out
+                        </Button>
+                    </div>
+                ) : (
+                    <Button onClick={goToLoginPage} className="bg-primary text-primary-2">
+                        Login
+                    </Button>
+                )}
                </div>
 
             {/* Moving Title */}

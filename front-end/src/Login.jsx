@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 
 export function LoginButton() {
 const { user } = useContext(UserContext);
+const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const handleGoogleLogin = async () => {
@@ -60,6 +61,10 @@ const { user } = useContext(UserContext);
       setError(err.message);
     }
   };
+
+  if (user) {
+    return <p>Welcome!</p>; // If the user is logged in, show their name
+  }
 
   return (
     <div className="flex flex-col gap-4">
