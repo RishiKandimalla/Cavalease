@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "./components/Button";
 import { nav } from "framer-motion/client";
+import MapComponent from "./components/MapComponent.jsx";
 
 function Searchers() {
     const navigate = useNavigate();
@@ -141,6 +142,9 @@ function Searchers() {
                                 className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             />
                         </div>
+                        <div className="col-span-2 mt-4">
+        <MapComponent latitude={formData.latitude} longitude={formData.longitude} />
+      </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

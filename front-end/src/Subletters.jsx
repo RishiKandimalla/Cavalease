@@ -49,7 +49,7 @@ function Subletters() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    navigate('/preferences-saved');
+    navigate('/listing-added');
   };
 
   return (
