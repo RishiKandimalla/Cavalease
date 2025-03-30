@@ -137,7 +137,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Frontend during dev
+    "http://localhost:5173",  # Frontend during dev
     "https://cavalease.vercel.app",  # Frontend in production
 ]
 

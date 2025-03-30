@@ -33,7 +33,8 @@ class Listing(models.Model):
     maxAge = models.IntegerField(default=100,validators=[MinValueValidator(1)])
     studentsOnly = models.BooleanField(default=False)
     numPeopleContacted = models.IntegerField(default=0)
-    subletter = models.ForeignKey(Subletter, related_name="listings", on_delete=models.CASCADE)  # One subletter per listing
+    #subletter = models.ForeignKey(Subletter, related_name="listings", on_delete=models.CASCADE)  # One subletter per listing
+    subletter_id = models.CharField(max_length=100)  # Store Firebase UID
 
 
 class Searcher(models.Model):

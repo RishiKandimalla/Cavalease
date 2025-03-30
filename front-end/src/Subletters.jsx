@@ -53,14 +53,29 @@ function Subletters() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const today = new Date();
+    const leaseStartDate = new Date(formData.leaseStart);
+    const leaseEndDate = new Date(formData.leaseEnd);
+  
+    // Check if lease start date is in the future
+    if (leaseStartDate <= today) {
+      alert("Lease start date must be after today's date.");
+      return;
+    }
+  
+    // Check if lease end date is after lease start date
+    if (leaseEndDate <= leaseStartDate) {
+      alert("Lease end date must be after the lease start date.");
+      return;
+    }
     const formDataToSend = new FormData();
+    formDataToSend.append("subletter_Id", user.uid);
     for (const key in formData) {
       formDataToSend.append(key, formData[key]);
     }
     try {
       const response = await API.post(
-        "/api/subletters",
+        "/api/listings/",
         formDataToSend, 
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -202,7 +217,6 @@ function Subletters() {
               name="image"
               onChange={handleImageChange}
               className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
 
@@ -217,7 +231,7 @@ function Subletters() {
             <span className="text-lg">Is Rent Negotiable</span>
           </div>
 
-          <div>
+          {/*<div>
             <label className="block text-lg font-medium text-gray-700">Date Posted</label>
             <input
               name="datePosted"
@@ -227,7 +241,7 @@ function Subletters() {
               className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
-          </div>
+          </div>*/}
 
           <div>
             <label className="block text-lg font-medium text-gray-700">Number of Bedrooms Available</label>
@@ -323,7 +337,7 @@ function Subletters() {
             <span className="text-lg">Other Present Housemates</span>
           </div>
 
-          <div className="flex items-center">
+          {/*<div className="flex items-center">
             <input
               type="checkbox"
               name="available"
@@ -332,7 +346,7 @@ function Subletters() {
               className="mr-2"
             />
             <span className="text-lg">Available</span>
-          </div>
+          </div>*/}
 
           <div>
             <label className="block text-lg font-medium text-gray-700">Gender Preference</label>

@@ -13,7 +13,7 @@ class SubletterSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'email', 'phone_number']
         
 class ListingSerializer(serializers.ModelSerializer):
-    subletter = serializers.PrimaryKeyRelatedField(queryset=Subletter.objects.all())  # Expecting subletter ID
+    #subletter = serializers.PrimaryKeyRelatedField(queryset=Subletter.objects.all())  # Expecting subletter ID
     class Meta:
         model = Listing
         fields = '__all__'
