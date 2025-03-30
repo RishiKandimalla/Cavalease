@@ -109,6 +109,24 @@ function Homepage() {
             </Button>
         </div>
       </motion.div>
+      <motion.div
+          className="p-6 max-w-3xl mx-auto my-12 border-4 border-primary-2 rounded-2xl shadow-xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
+          <p className="text-xl font-semibold text-center mb-4">
+            Manage or search for listings
+          </p>
+          <div className="flex justify-center gap-10">
+            <Button onClick={() => handleNavigation("/my-listings")}>
+              My Listings
+            </Button>
+            <Button onClick={() => handleNavigation("/listings")}>
+              Search Listings
+            </Button>
+          </div>
+        </motion.div>
     </div>
     </div>
   );

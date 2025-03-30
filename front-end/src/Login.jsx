@@ -62,9 +62,9 @@ const { user } = useContext(UserContext);
     }
   };
 
-  if (user) {
-    return <p>Welcome!</p>; // If the user is logged in, show their name
-  }
+//   if (user) {
+//     return <p>Welcome!</p>; // If the user is logged in, show their name
+//   }
 
   return (
     <div className="flex flex-col gap-4">
