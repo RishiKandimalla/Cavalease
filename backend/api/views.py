@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, DestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Listing, SearcherSavedListings
 from .serializers import ListingSerializer
@@ -22,3 +22,11 @@ class ListingListCreateView(ListCreateAPIView):
             queryset = queryset.filter(saved_by_searchers__searcher_id=searcher_id)
 
         return queryset
+
+class ListingUpdateView(RetrieveUpdateAPIView):
+    queryset = Listing.objects.all()
+    serializer_class = ListingSerializer
+    
+class ListingDeleteView(DestroyAPIView):
+    queryset = Listing.objects.all()  # The set of objects that can be deleted
+    serializer_class = ListingSerializer
