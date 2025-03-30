@@ -3,10 +3,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
-class Subletter(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(blank=True, null=True, max_length=254)
-    phone_number = models.CharField(blank=True, null=True, max_length=15)
+#class Subletter(models.Model):
+#    name = models.CharField(max_length=255)
+#    email = models.EmailField(blank=True, null=True, max_length=254)
+#    phone_number = models.CharField(blank=True, null=True, max_length=15)
 
 class Listing(models.Model):
     address = models.CharField(max_length=255)
