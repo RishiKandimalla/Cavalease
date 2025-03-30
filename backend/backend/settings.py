@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import secrets
 import environ
+import django_heroku
 #import storages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
