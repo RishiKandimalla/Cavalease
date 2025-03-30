@@ -32,6 +32,15 @@ function Homepage() {
     navigate('/searchers');
   };
 
+  const handleNavigation = (path) => {
+    if (user) {
+      navigate(path);
+    } else {
+      navigate("/login");
+    }
+  };
+  
+
   const goToLoginPage = () => {
     navigate("/login"); // Navigate to login page when button is clicked
   };
@@ -92,8 +101,12 @@ function Homepage() {
           What are you looking for?
         </p>
         <div className="flex justify-center gap-10">
-          <Button onClick={goToSubletterPage}>Subletting my place</Button>
-          <Button onClick={goToSearcherPage}>Searching for a place</Button>
+        <Button onClick={() => handleNavigation('/subletters')}>
+              Subletting my place
+            </Button>
+            <Button onClick={() => handleNavigation('/searchers')}>
+              Searching for a place
+            </Button>
         </div>
       </motion.div>
     </div>
