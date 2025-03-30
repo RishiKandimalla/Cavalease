@@ -153,7 +153,13 @@ STORAGES = {
              'region_name': 'us-east-1'
          },
      },
-     "staticfiles": "storages.backends.s3.S3Storage",
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            'bucket_name': 'cavalease-bucket',
+            'region_name': 'us-east-1'
+        }
+    }
  }
 
 try:
