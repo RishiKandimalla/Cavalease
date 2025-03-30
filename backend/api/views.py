@@ -47,7 +47,7 @@ class SearcherListCreateView(ListCreateAPIView):
 class SearcherRetrieveView(RetrieveAPIView):
     queryset = Searcher.objects.all()
     serializer_class = SearcherSerializer
-    lookup_field = 'id'
+    lookup_field = 'searcher_id'
     
 class SearcherUpdateView(RetrieveAPIView):
     queryset=Searcher.objects.all()

@@ -1,4 +1,3 @@
-// src/UserContext.js
 import React, { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase-config"; // Ensure Firebase is correctly set up
 import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
@@ -12,21 +11,23 @@ export const UserProvider = ({ children }) => {
 
   // Set up an auth state listener
   useEffect(() => {
-    // Set persistence to local to maintain the login state
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
+    const initializeAuth = async () => {
+      try {
+        await setPersistence(auth, browserLocalPersistence); // Ensure login persists
+
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-          if (currentUser) {
-            setUser(currentUser);
-            setLoading(false);
-          } 
+          setUser(currentUser);
+          setLoading(false); // Ensure loading state updates
         });
 
-        return () => unsubscribe(); // Cleanup the listener on unmount
-      })
-      .catch((error) => {
+        return unsubscribe; // Cleanup function to remove listener
+      } catch (error) {
         console.error("Error setting persistence:", error);
-      });
+        setLoading(false); // Ensure app doesn't stay in loading state forever
+      }
+    };
+
+    initializeAuth();
   }, []);
 
   return (

@@ -19,7 +19,7 @@ class ListingFilter(filters.FilterSet):
     min_age = filters.NumberFilter(field_name="minAge", lookup_expr='gte', required=False)
     max_age = filters.NumberFilter(field_name="maxAge", lookup_expr='lte', required=False)
     student = filters.BooleanFilter(field_name="studentsOnly", method="filterIfTrue", required=False)
-    subletter_id = filters.NumberFilter(field_name="subletter_id", required=False)
+    subletter_id = filters.CharFilter(field_name="subletter_id", required=False)
     max_rent = filters.NumberFilter(field_name="monthlyRent", lookup_expr='lte', required=False)
     pets = filters.BooleanFilter(field_name="petsAllowed", required=False, method="filterIfTrue")
     parking = filters.BooleanFilter(field_name="parkingPass", required=False, method="filterIfTrue")

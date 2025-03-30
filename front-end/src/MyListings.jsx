@@ -20,7 +20,7 @@ function MyListings() {
     const fetchListings = async () => {
       try {
         console.log(user.uid)
-        const response = await API.get('/api/listings/?subletter_id=${user.uid}');  // Adjust endpoint as needed
+        const response = await API.get(`/api/listings/?subletter_id=${user.uid}`);  // Adjust endpoint as needed
         setListings(response.data);  // Set the fetched listings to state
         setLoading(false);  // Set loading to false once the data is fetched
       } catch (err) {
