@@ -37,8 +37,8 @@ function Subletters() {
     otherPresentHousemates: false,
     available: false,
     genderPreference: '3',
-    minAge: '',
-    maxAge: '',
+    minAge: '1',
+    maxAge: '100',
     studentsOnly: false
   });
 
@@ -93,7 +93,7 @@ function Subletters() {
     }
     
     const formDataToSend = new FormData();
-    formDataToSend.append("subletter_Id", user.uid);
+    formDataToSend.append("subletter_id", user.uid);
     for (const key in formData) {
       formDataToSend.append(key, formData[key]);
     }
@@ -382,14 +382,14 @@ function Subletters() {
           </div>*/}
 
           <div>
-            <label className="block text-lg font-medium text-gray-700">Gender</label>
+            <label className="block text-lg font-medium text-gray-700">Gender Preference</label>
             <select
               name="genderPreference"
               value={formData.genderPreference}
               onChange={handleChange}
               className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
-              <option value="3">Other</option>
+              <option value="3">No Preference</option>
               <option value="1">Male</option>
               <option value="2">Female</option>
             </select>

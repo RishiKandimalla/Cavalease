@@ -27,7 +27,7 @@ class Listing(models.Model):
     furnished = models.BooleanField()
     parkingPass = models.BooleanField()
     otherPresentHousemates = models.BooleanField()
-    available = models.BooleanField()
+    available = models.BooleanField(default=1)
     genderPreference = models.IntegerField(choices=[(1,"Male"),(2,"Female"),(3, "Any")], default=3)
     minAge = models.IntegerField(default=0,validators=[MinValueValidator(1)])
     maxAge = models.IntegerField(default=100,validators=[MinValueValidator(1)])
