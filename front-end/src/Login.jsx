@@ -72,14 +72,14 @@ export function LoginForm() {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="p-2 border rounded"
+        className="p-2 border rounded bg-white"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="p-2 border rounded"
+        className="p-2 border rounded bg-white"
       />
       <button onClick={handleSignup} className="bg-primary-2 text-white p-2 rounded">Sign Up</button>
       <button onClick={handleLogin} className="bg-primary text-white p-2 rounded">Login</button>

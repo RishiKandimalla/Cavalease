@@ -84,14 +84,14 @@ function Subletters() {
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <div>
-            <label className="block text-lg font-medium text-gray-700">Address</label>
+            <label className="bg-white block text-lg font-medium text-gray-700">Address</label>
             <input
               name="address"
               type="text"
               placeholder="Enter address"
               value={formData.address}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 mt-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -104,7 +104,7 @@ function Subletters() {
               placeholder="Enter building name"
               value={formData.buildingName}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 bg-white mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -118,7 +118,7 @@ function Subletters() {
                 placeholder="Enter latitude"
                 value={formData.latitude}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full p-3 bg-white mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
@@ -130,7 +130,7 @@ function Subletters() {
                 placeholder="Enter longitude"
                 value={formData.longitude}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
           </div>
@@ -143,7 +143,7 @@ function Subletters() {
                 type="date"
                 value={formData.leaseStart}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
               />
             </div>
@@ -155,7 +155,7 @@ function Subletters() {
                 type="date"
                 value={formData.leaseEnd}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
               />
             </div>
@@ -169,7 +169,7 @@ function Subletters() {
               placeholder="Enter monthly rent"
               value={formData.monthlyRent}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -180,7 +180,7 @@ function Subletters() {
               type="file"
               name="image"
               onChange={handleImageChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -203,7 +203,7 @@ function Subletters() {
               type="date"
               value={formData.datePosted}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -216,7 +216,7 @@ function Subletters() {
               placeholder="Enter available bedrooms"
               value={formData.numBedroomsAvailable}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -229,7 +229,7 @@ function Subletters() {
               placeholder="Enter total bedrooms"
               value={formData.totalBedrooms}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -242,7 +242,7 @@ function Subletters() {
               placeholder="Enter number of bathrooms"
               value={formData.numBathrooms}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -253,7 +253,7 @@ function Subletters() {
               name="washerAndDryerAvailable"
               checked={formData.washerAndDryerAvailable}
               onChange={handleChange}
-              className="mr-2"
+              className="mr-2 text-white bg-white"
             />
             <span className="text-lg">Washer and Dryer Available</span>
           </div>
@@ -319,7 +319,7 @@ function Subletters() {
               name="genderPreference"
               value={formData.genderPreference}
               onChange={handleChange}
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="3">No Preference</option>
               <option value="1">Male</option>
@@ -336,7 +336,7 @@ function Subletters() {
                 placeholder="Enter min age"
                 value={formData.minAge}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
@@ -348,7 +348,7 @@ function Subletters() {
                 placeholder="Enter max age"
                 value={formData.maxAge}
                 onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
           </div>
