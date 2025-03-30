@@ -1,6 +1,6 @@
 // src.MyListings.jsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button'; // Assuming you have a Button component
 import axios from 'axios';
@@ -19,7 +19,8 @@ function MyListings() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await API.get('/api/listings/');  // Adjust endpoint as needed
+        console.log(user.uid)
+        const response = await API.get('/api/listings/?subletter_id=${user.uid}');  // Adjust endpoint as needed
         setListings(response.data);  // Set the fetched listings to state
         setLoading(false);  // Set loading to false once the data is fetched
       } catch (err) {
