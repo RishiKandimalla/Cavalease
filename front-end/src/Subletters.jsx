@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Button from "./components/Button";
 import { motion } from "framer-motion";
+import axios from "axios";
+import API from "./api";
 
 function Subletters() {
   const navigate = useNavigate();
@@ -46,10 +48,26 @@ function Subletters() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    navigate('/listing-added');
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    try {
+      const response = await API.post(
+        "/subletters",
+        formDataToSend, 
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+  
+      console.log("Listing added successfully:", response.data);
+      navigate("/listing-added");
+    } catch (error) {
+      console.error("Error adding listing:", error.response ? error.response.data : error);
+    }
+  
   };
 
   return (
