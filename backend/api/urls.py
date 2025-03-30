@@ -9,6 +9,6 @@ urlpatterns = [
     #path('subletters/', SubletterListCreateView.as_view(), name='subletter-list-create'),
     #path('subletters/<int:id>/', SubletterRetrieveView.as_view(), name='subletter-retrieve'),
     path('searchers/', SearcherListCreateView.as_view(), name='searcher-list-create'),
-    path('searchers/<int:id>/', SearcherRetrieveView.as_view(), name='searcher-retrieve'),
-    path('searchers/<int:id>/update/', SearcherUpdateView.as_view(),name = 'searcher-update' )
+    path('searchers/<str:searcher_id>/', SearcherRetrieveView.as_view(), name='searcher-retrieve'),
+    path('searchers/<str:searcher_id>/update/', SearcherUpdateView.as_view(),name = 'searcher-update' )
 ]
