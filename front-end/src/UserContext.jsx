@@ -4,10 +4,11 @@ import { auth } from "../firebase-config"; // Ensure Firebase is correctly set u
 import { onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 // Create a context for the user
-export const UserContext = createContext();
+export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Set up an auth state listener
   useEffect(() => {
@@ -17,9 +18,8 @@ export const UserProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
           if (currentUser) {
             setUser(currentUser);
-          } else {
-            setUser(null);
-          }
+            setLoading(false);
+          } 
         });
 
         return () => unsubscribe(); // Cleanup the listener on unmount
@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, loading }}>
       {children}
     </UserContext.Provider>
   );

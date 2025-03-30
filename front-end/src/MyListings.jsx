@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import Button from './components/Button'; // Assuming you have a Button component
 import axios from 'axios';
 import API from './api';
+import { UserContext } from './UserContext.jsx';
 
 function MyListings() {
   const navigate = useNavigate();
-
+  const { user , loading1} = useContext(UserContext);
   // Placeholder data for listings
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);  // State for loading status

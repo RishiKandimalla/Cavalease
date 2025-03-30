@@ -9,10 +9,10 @@ import API from "./api";
 
 function Subletters() {
   const navigate = useNavigate();
-    const { user } = useContext(UserContext); // Get user from context
+    const { user , loading} = useContext(UserContext); // Get user from context
       const isLoggedIn = !!user;
 
-      if (!isLoggedIn) {
+      if (!isLoggedIn && !loading) {
         navigate("/login");
       }
   
