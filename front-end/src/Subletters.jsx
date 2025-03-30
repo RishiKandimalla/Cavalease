@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import { UserContext } from "./UserContext.jsx";
+import { signOut } from "firebase/auth";
 import Button from "./components/Button";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -8,7 +9,12 @@ import API from "./api";
 
 function Subletters() {
   const navigate = useNavigate();
-  const { user, logout } = useContext(UserContext);
+    const { user } = useContext(UserContext); // Get user from context
+      const isLoggedIn = !!user;
+
+      if (!isLoggedIn) {
+        navigate("/login");
+      }
   
   const [formData, setFormData] = useState({
     address: '',
@@ -50,6 +56,15 @@ function Subletters() {
       image: e.target.files[0]
     });
   };
+
+    const handleSignOut = async () => {
+          try {
+              await signOut(auth);
+              console.log("User signed out successfully");
+          } catch (error) {
+              console.error("Error signing out:", error);
+          }
+      };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,9 +119,18 @@ function Subletters() {
         <button onClick={() => navigate("/")} className="text-3xl font-bold bg-primary-2 tracking-wide cursor-pointer">
           CAVALEASE
         </button>
-        <Button onClick={() => navigate('/login')} className="bg-primary text-primary-2 ">
-          Login
-        </Button>
+        {isLoggedIn ? (
+          <div className="flex items-center gap-4">
+            <p>You are logged in</p>
+            <Button onClick={handleSignOut} className="bg-primary text-white">
+              Sign out
+            </Button>
+          </div>
+        ) : (
+          <Button onClick={() => navigate("/login")} className="bg-primary text-primary-2">
+            Login
+          </Button>
+        )}
       </div>
 
       {/* Moving Title */}
