@@ -1,14 +1,22 @@
 // src/Login.jsx
 import React, { useState, useContext } from "react";
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth, provider } from "../firebase-config";
+import { auth } from "../firebase-config.js";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext.jsx"; 
 import { motion } from "framer-motion";
 
 export function LoginButton() {
 const { user } = useContext(UserContext);
+
 const navigate = useNavigate();
+
+useEffect(() => {
+    if (user) {
+      navigate("/"); // If the user is already logged in, navigate to the homepage
+    }
+  }, [user, navigate]);
+  
   const [error, setError] = useState(null);
 
   const handleGoogleLogin = async () => {
@@ -24,10 +32,10 @@ const navigate = useNavigate();
 
   return (
     <div>
-      <button onClick={handleGoogleLogin} className="bg-blue-500 text-white p-3 rounded-md">
+      {/* <button onClick={handleGoogleLogin} className="bg-blue-500 text-white p-3 rounded-md">
         Sign in with Google
       </button>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} */}
     </div>
   );
 }
