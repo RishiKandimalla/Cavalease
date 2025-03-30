@@ -1,7 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, DestroyAPIView,RetrieveAPIView
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Listing, SearcherSavedListings, Subletter, Searcher
-from .serializers import ListingSerializer, SubletterSerializer, SearcherSerializer
+from .models import Listing, SearcherSavedListings, Searcher
+from .serializers import ListingSerializer, SearcherSerializer
 from .filters import ListingFilter
 
 class ListingListCreateView(ListCreateAPIView):
@@ -31,14 +31,14 @@ class ListingDeleteView(DestroyAPIView):
     queryset = Listing.objects.all()  # The set of objects that can be deleted
     serializer_class = ListingSerializer
     
-class SubletterListCreateView(ListCreateAPIView):
+""" class SubletterListCreateView(ListCreateAPIView):
     queryset = Subletter.objects.all()
-    serializer_class = SubletterSerializer
+    serializer_class = SubletterSerializer """
 
-class SubletterRetrieveView(RetrieveAPIView):
+""" class SubletterRetrieveView(RetrieveAPIView):
     queryset = Subletter.objects.all()
     serializer_class = SubletterSerializer
-    lookup_field = 'id'
+    lookup_field = 'id' """
     
 class SearcherListCreateView(ListCreateAPIView):
     queryset = Searcher.objects.all()
