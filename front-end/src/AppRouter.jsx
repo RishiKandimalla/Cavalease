@@ -2,6 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Homepage from './Homepage'; // Import Homepage component
+import { UserProvider } from "./UserContext.jsx"; // Import UserProvider
 import App from './App'; // Import App component
 import Searchers from './Searchers'; // Import Searchers component
 import Subletters from './Subletters'; // If you have this component
@@ -26,6 +27,7 @@ function AppRouter() {
   }, []);
 
   return (
+    <UserProvider>
     <Routes>
       <Route path="/" element={<Homepage />} /> {/* Homepage route */}
       <Route path="/searchers" element={<Searchers />} /> {/* Searchers route */}
@@ -36,6 +38,7 @@ function AppRouter() {
       <Route path="/listing-added" element={<ListingAdded />} />
       <Route path="/my-listings" element={<MyListings />} />
     </Routes>
+    </UserProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "./UserContext.jsx";
 import Button from "./components/Button";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -7,6 +8,8 @@ import API from "./api";
 
 function Subletters() {
   const navigate = useNavigate();
+  const { user, logout } = useContext(UserContext);
+  
   const [formData, setFormData] = useState({
     address: '',
     latitude: '',
@@ -57,7 +60,7 @@ function Subletters() {
     }
     try {
       const response = await API.post(
-        "/subletters",
+        "/api/subletters",
         formDataToSend, 
         { headers: { "Content-Type": "multipart/form-data" } }
       );

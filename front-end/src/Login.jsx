@@ -1,11 +1,13 @@
 // src/Login.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, provider } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext.jsx"; 
 import { motion } from "framer-motion";
 
 export function LoginButton() {
+const { user } = useContext(UserContext);
   const [error, setError] = useState(null);
 
   const handleGoogleLogin = async () => {
@@ -30,6 +32,7 @@ export function LoginButton() {
 }
 
 export function LoginForm() {
+const { user } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -39,6 +42,7 @@ export function LoginForm() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("User signed up successfully!");
+      navigate("/");
       
     } catch (err) {
       console.error("Signup Error:", err.message);
