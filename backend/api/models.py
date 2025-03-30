@@ -13,12 +13,12 @@ class Listing(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     buildingName = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='unit_images/')
+    image = models.ImageField(upload_to='unit_images/', blank=True, null=True)
     leaseStart = models.DateField()
     leaseEnd = models.DateField()
     monthlyRent = models.IntegerField(validators=[MinValueValidator(1)]);
     isRentNegotiable = models.BooleanField(default=False)
-    datePosted = models.DateField()
+    datePosted = models.DateField(auto_now_add=True)
     numBedroomsAvailable = models.IntegerField(validators=[MinValueValidator(0)])
     totalBedrooms = models.IntegerField(validators=[MinValueValidator(0)])
     numBathrooms = models.IntegerField(validators=[MinValueValidator(0)])
@@ -39,7 +39,7 @@ class Listing(models.Model):
 class Searcher(models.Model):
     name = models.CharField(max_length=255)
     age = models.IntegerField(validators=[MinValueValidator(1)]);
-    gender = models.IntegerField(choices=[(1,"Male"),(2,"Female")], default=3)
+    gender = models.IntegerField(choices=[(1,"Male"),(2,"Female"),(3, "Any")], default=3)
     email = models.EmailField(blank=True, null=True, max_length=254)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
