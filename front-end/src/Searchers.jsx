@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "./components/Button";
+import { nav } from "framer-motion/client";
 
 function Searchers() {
     const navigate = useNavigate();
@@ -30,16 +31,17 @@ function Searchers() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Form Data Submitted:", formData);
+        navigate('/preferences-saved');
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-white">
 
            <div className="fixed top-0 left-0 w-full bg-primary-2 text-white py-4 px-8 flex justify-between items-center shadow-md z-50">
                <button onClick={() => navigate("/")} className="text-3xl font-bold bg-primary-2 tracking-wide cursor-pointer">
                  CAVALEASE
              </button>
-                 <Button onClick={() => navigate('/login')} className="bg-white text-primary-2 font-bold">
+                 <Button onClick={() => navigate('/login')} className="bg-primary text-primary-2 ">
                    Login
                  </Button>
                </div>

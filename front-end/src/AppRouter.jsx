@@ -5,6 +5,8 @@ import Homepage from './Homepage'; // Import Homepage component
 import App from './App'; // Import App component
 import Searchers from './Searchers'; // Import Searchers component
 import Subletters from './Subletters'; // If you have this component
+import PreferenceSaved from './PreferenceSaved.jsx';
+import Listings from './Listings.jsx';
 import { LoginButton, LoginForm } from "./Login";
 import { auth } from "../firebase-config.js";  // Import Firebase Auth
 import { onAuthStateChanged } from "firebase/auth";
@@ -27,6 +29,8 @@ function AppRouter() {
       <Route path="/searchers" element={<Searchers />} /> {/* Searchers route */}
       <Route path="/subletters" element={<Subletters />} /> {/* Subletters route */}
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/preferences-saved" element={<PreferenceSaved />} />
+      <Route path="/listings" element={<Listings />} />
     </Routes>
   );
 }

@@ -55,7 +55,16 @@ function Homepage() {
       <div className="fixed top-0 left-0 w-full bg-primary-2 text-white py-4 px-8 flex justify-between items-center shadow-md z-50">
         <h1 className="text-3xl font-bold tracking-wide">CAVALEASE</h1>
         <div>
-        <Button onClick={goToLoginPage}>Login</Button>
+        {user ? (
+          <>
+            <p>You are logged in</p> 
+            <Button onClick={handleSignOut}>Sign out</Button> {}
+          </>
+        ) : (
+        <Button onClick={goToLoginPage}>Login</Button> // Show login button if not logged in
+      )}
+
+      
        </div>
       </div>
 
