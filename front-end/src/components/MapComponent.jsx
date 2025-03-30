@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 
 const MapComponent = () => {
   useEffect(() => {
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCGl1FE1i5YxcEhAtgjDm2NFeQHQjYgp3c&callback=initMap&v=weekly`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&v=weekly`;
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
