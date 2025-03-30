@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'api',
     'storages',
     'environ'
+    'django_filters'
 ]
 
 MIDDLEWARE = [

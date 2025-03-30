@@ -37,9 +37,9 @@ class Listing(models.Model):
 
 
 class Searcher(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=255)
     age = models.IntegerField(validators=[MinValueValidator(1)]);
-    genderPreference = models.IntegerField(choices=[(1,"Male"),(2,"Female")], default=3)
+    gender = models.IntegerField(choices=[(1,"Male"),(2,"Female")], default=3)
     email = models.EmailField(blank=True, null=True, max_length=254)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
