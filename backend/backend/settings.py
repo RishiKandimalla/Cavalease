@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import secrets
+import environ
+#import storages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,11 +43,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'api',
+    'storages',
+    'environ',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,6 +134,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Frontend during dev
+    "https://cavalease.vercel.app",  # Frontend in production
+]
+
+env = environ.Env()
+environ.Env.read_env(env_file='.env')
+ 
+ 
+STORAGES = {
+     "default": {
+         "BACKEND": "storages.backends.s3.S3Storage",
+         "OPTIONS": {
+             'bucket_name': 'cavalease-bucket',
+             'region_name': 'us-east-1'
+         },
+     },
+     "staticfiles": "storages.backends.s3.S3Storage",
+ }
 
 try:
     if 'HEROKU' in os.environ:
