@@ -1,12 +1,28 @@
 // src/Homepage.jsx
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./components/Button";
 import { motion } from "framer-motion";
-// import LoginButton from "./Login";
+import {LoginButton, LoginForm} from "./Login";
+import { auth } from "../firebase-config"; // Ensure this import is correct
+import { signOut, onAuthStateChanged } from "firebase/auth"; 
 
 function Homepage() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);  // Set the user if logged in
+      } else {
+        setUser(null);  // Set user to null if not logged in
+      }
+    });
+
+    return () => unsubscribe(); // Clean up the listener when component unmounts
+  }, []);
+  
 
   const goToSubletterPage = () => {
     navigate('/subletters');
@@ -14,6 +30,21 @@ function Homepage() {
 
   const goToSearcherPage = () => {
     navigate('/searchers');
+  };
+
+  const goToLoginPage = () => {
+    navigate("/login"); // Navigate to login page when button is clicked
+  };
+  
+  const handleSignOut = () => {
+    signOut(auth)  // Sign out the user using Firebase's signOut method
+      .then(() => {
+        console.log("User signed out");
+        setUser(null);  // Clear the user state after sign out
+      })
+      .catch((error) => {
+        console.error("Error signing out: ", error.message);
+      });
   };
 
   return (
@@ -24,13 +55,12 @@ function Homepage() {
       <div className="fixed top-0 left-0 w-full bg-primary-2 text-white py-4 px-8 flex justify-between items-center shadow-md z-50">
         <h1 className="text-3xl font-bold tracking-wide">CAVALEASE</h1>
         <div>
-      {/* <h1>Firebase Login Example</h1>
-      <LoginButton /> */}
-    </div>
+        <Button onClick={goToLoginPage}>Login</Button>
+       </div>
       </div>
-      <div className="mt-40 w-full text-center">
 
- 
+
+      <div className="mt-40 w-full text-center"> 
       <motion.h1 
         className="text-7xl font-semibold text-center mb-4"
         initial={{ opacity: 0, y: -50 }} // Starts faded and moved up
