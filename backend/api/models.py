@@ -52,6 +52,6 @@ class Searcher(models.Model):
 class SearcherSavedListings(models.Model):
     # Many-to-many relationship for saved listings
     searcher = models.ForeignKey(Searcher, on_delete=models.CASCADE, related_name="saved_listings")
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="saved_by_searchers")
 
     saved_at = models.DateTimeField(auto_now_add=True)
