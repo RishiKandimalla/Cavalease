@@ -1,74 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './components/Button'; // Assuming you have a Button component
+import API from './api';
+
 
 function Listings() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);  // State for loading status
+  const [error, setError] = useState(null);
+  const [listings, setListings] = useState([]);
 
-  // Placeholder data for listings
-  const [listings, setListings] = useState([
-    {
-      id: 1,
-      address: '123 Main St, Downtown',
-      latitude: '38.0293',
-      longitude: '-78.4767',
-      buildingName: 'Downtown Apartments',
-      image: 'https://via.placeholder.com/150',
-      leaseStart: '2025-06-01',
-      leaseEnd: '2026-06-01',
-      monthlyRent: 1200,
-      isRentNegotiable: false,
-      datePosted: '2025-03-01',
-      numBedroomsAvailable: 2,
-      totalBedrooms: 4,
-      numBathrooms: 2,
-      washerAndDryerAvailable: true,
-      petsAllowed: false,
-      furnished: true,
-      parkingPass: true,
-      otherPresentHousemates: false,
-      available: true,
-      genderPreference: 3, // Any gender preference
-      minAge: 18,
-      maxAge: 30,
-      studentsOnly: true,
-      numPeopleContacted: 5,
-    },
-    {
-      id: 2,
-      address: '456 College Ave, UVA Area',
-      latitude: '38.0301',
-      longitude: '-78.5077',
-      buildingName: 'UVA Apartments',
-      image: 'https://via.placeholder.com/150',
-      leaseStart: '2025-08-01',
-      leaseEnd: '2026-08-01',
-      monthlyRent: 900,
-      isRentNegotiable: true,
-      datePosted: '2025-03-10',
-      numBedroomsAvailable: 1,
-      totalBedrooms: 3,
-      numBathrooms: 1,
-      washerAndDryerAvailable: true,
-      petsAllowed: true,
-      furnished: false,
-      parkingPass: false,
-      otherPresentHousemates: true,
-      available: true,
-      genderPreference: 2, // Female preference
-      minAge: 18,
-      maxAge: 25,
-      studentsOnly: true,
-      numPeopleContacted: 3,
-    },
-    // More listings can be added here
-  ]);
+
 
   // Placeholder for searching or filtering the listings (optional)
   useEffect(() => {
-    // Here you would make an API call or filter listings based on search preferences
-    console.log('Listings data is available.');
-  }, [listings]);
+    const fetchListings = async () => {
+      try {
+        const response = await API.get('/api/listings/');  // Adjust endpoint as needed
+        setListings(response.data);  // Set the fetched listings to state
+        setLoading(false);  // Set loading to false once the data is fetched
+      } catch (err) {
+        console.error("Error fetching listings:", err);
+        setError("Failed to load listings.");  // Set error state
+        setLoading(false);  // Stop loading on error
+      }
+    };
+
+    fetchListings();
+  }, []);
 
   const [expandedListingId, setExpandedListingId] = useState(null);
 
@@ -79,6 +38,23 @@ function Listings() {
       setExpandedListingId(id); // Expand if not already expanded
     }
   };
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center min-h-screen">
+        <p>Loading listings...</p>
+      </div>
+    );
+  }
+
+  // Handle error state
+  if (error) {
+    return (
+      <div className="w-full flex justify-center items-center min-h-screen">
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
 <div className="w-full flex justify-center">
@@ -96,7 +72,7 @@ function Listings() {
         <h1 className="text-3xl font-semibold text-center mb-4">Search Results</h1>
         <p className="text-lg text-center mb-6">Here are the available listings based on your search.</p>
 
-        {/* Placeholder listings */}
+        {/* listings */}
         <div className="space-y-6 w-full">
           {listings.map((listing) => (
              <div key={listing.id} className="border-2 border-primary-2 p-4 rounded-lg shadow-md flex w-full">
@@ -113,7 +89,9 @@ function Listings() {
                <p className="text-md">{`Posted on: ${listing.datePosted}`}</p>
 
                {/* More Details Button */}
-               <Button onClick={() => toggleDetails(listing.id)} className="mt-4">
+               <Button 
+                  onClick={() => toggleDetails(listing.id)} 
+                  className="mt-4 w-64 h-8 px-4 py-1 text-sm">
                  {expandedListingId === listing.id ? 'Show Less' : 'More Details'}
                </Button>
 

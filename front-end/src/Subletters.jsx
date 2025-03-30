@@ -35,7 +35,7 @@ function Subletters() {
     furnished: false,
     parkingPass: false,
     otherPresentHousemates: false,
-    available: false,
+    available: true,
     genderPreference: '3',
     minAge: '1',
     maxAge: '100',

@@ -5,6 +5,8 @@ import { signOut } from "firebase/auth";
 import Button from "./components/Button";
 import { UserContext } from "./UserContext.jsx";
 import MapComponent from "./components/MapComponent.jsx";
+import API from "./api";
+
 
 function Searchers() {
     const navigate = useNavigate();
@@ -44,10 +46,25 @@ function Searchers() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data Submitted:", formData);
-        navigate('/preferences-saved');
+        const formDataToSend = new FormData();
+        formDataToSend.append("searcher_id", user.uid);
+        for (const key in formData) {
+          formDataToSend.append(key, formData[key]);
+        }
+        try {
+          const response = await API.post(
+            "/api/searchers/",
+            formDataToSend, 
+            { headers: { "Content-Type": "multipart/form-data" } }
+          );
+      
+          console.log("Preferences added successfully:", response.data);
+          navigate("/preferences-saved");
+        } catch (error) {
+          console.error("Error adding preferences:", error.response ? error.response.data : error);
+        }
     };
 
     return (
@@ -79,7 +96,7 @@ function Searchers() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.3, ease: "easeOut" }}
                 >
-                    Searcher Form
+                    Searching for Sublet
                 </motion.h1>
 
                 {/* Animated Form */}
@@ -98,7 +115,7 @@ function Searchers() {
                             placeholder="Enter your name" 
                             value={formData.name} 
                             onChange={handleInputChange} 
-                            className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required 
                         />
                     </div>
@@ -111,20 +128,20 @@ function Searchers() {
                             placeholder="Enter your age" 
                             value={formData.age} 
                             onChange={handleInputChange} 
-                            className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full bg-white p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required 
                         />
                     </div>
 
                     <div>
-                        <label className="block text-lg font-medium text-gray-700">Gender Preference </label>
+                        <label className="block text-lg font-medium text-gray-700">Gender</label>
                         <select 
                             name="genderPreference" 
                             value={formData.genderPreference} 
                             onChange={handleInputChange} 
-                            className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full p-3 bg-white mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                         >
-                            <option value="3">No Preference</option>
+                            <option value="3">Other</option>
                             <option value="1">Male</option>
                             <option value="2">Female</option>
                         </select>
@@ -138,7 +155,7 @@ function Searchers() {
                             placeholder="Enter your email" 
                             value={formData.email} 
                             onChange={handleInputChange} 
-                            className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full p-3 mt-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
                     </div>
 
@@ -151,7 +168,7 @@ function Searchers() {
                                 placeholder="Enter latitude" 
                                 value={formData.latitude} 
                                 onChange={handleInputChange} 
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="w-full p-3 mt-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             />
                         </div>
 
@@ -163,7 +180,7 @@ function Searchers() {
                                 placeholder="Enter longitude" 
                                 value={formData.longitude} 
                                 onChange={handleInputChange} 
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="w-full p-3 mt-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             />
                         </div>
                         <div className="col-span-2 mt-4">
@@ -179,7 +196,7 @@ function Searchers() {
                                 type="date" 
                                 value={formData.leaseStart} 
                                 onChange={handleInputChange} 
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="w-full p-3 mt-2 border bg-white border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 required 
                             />
                         </div>
@@ -191,7 +208,7 @@ function Searchers() {
                                 type="date" 
                                 value={formData.leaseEnd} 
                                 onChange={handleInputChange} 
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="w-full p-3 mt-2 border bg-white border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 required 
                             />
                         </div>
@@ -205,7 +222,7 @@ function Searchers() {
                             placeholder="Enter your max rent" 
                             value={formData.maxRent} 
                             onChange={handleInputChange} 
-                            className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full p-3 mt-2 border bg-white border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required 
                         />
                     </div>

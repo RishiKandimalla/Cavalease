@@ -38,6 +38,7 @@ class Listing(models.Model):
 
 
 class Searcher(models.Model):
+    searcher_id = models.CharField(max_length=100, primary_key=True)
     name = models.CharField(max_length=255)
     age = models.IntegerField(validators=[MinValueValidator(1)]);
     gender = models.IntegerField(choices=[(1,"Male"),(2,"Female"),(3, "Any")], default=3)
@@ -51,8 +52,9 @@ class Searcher(models.Model):
     parkingPass = models.BooleanField(default=False)
     
 class SearcherSavedListings(models.Model):
-    # Many-to-many relationship for saved listings
-    searcher = models.ForeignKey(Searcher, on_delete=models.CASCADE, related_name="saved_listings")
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="saved_by_searchers")
-
+    searcher = models.ForeignKey(Searcher, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     saved_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('searcher', 'listing')  # Ensure that a searcher can save the same listing only once

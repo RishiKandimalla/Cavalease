@@ -92,7 +92,9 @@ function MyListings() {
                <p className="text-md">{`Posted on: ${listing.datePosted}`}</p>
 
                {/* More Details Button */}
-               <Button onClick={() => toggleDetails(listing.id)} className="mt-4">
+               <Button 
+                  onClick={() => toggleDetails(listing.id)} 
+                  className="mt-4 w-64 h-8 px-4 py-1 text-sm">
                  {expandedListingId === listing.id ? 'Show Less' : 'More Details'}
                </Button>
 
